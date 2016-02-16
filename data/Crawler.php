@@ -1,4 +1,5 @@
 <?php
+
 	/**
 	 * crawler核心程序
 	 */
@@ -56,11 +57,6 @@
 			 * 获取配置文件中的最大访问层级
 			 */
 			$this->max_level = $this->config->get('level') ? $this->config->get('level') : 0;
-
-			/**
-			 * 开始执行crawler
-			 */
-			$this->run();
 		}
 
 		/**
@@ -74,7 +70,7 @@
 		 * 加载默认的类库
 		 */
 		private function default_load() {
-			$load_array = array('config','filterhtml','hook','processurl');
+			$load_array = array('config','filterhtml','hook','processurl','curl');
 
 			foreach($load_array as $val) {
 				$this->load_class($val);
@@ -92,7 +88,7 @@
 		/**
 		 * crawler运行方法
 		 */
-		private function run() {
+		public function run() {
 
 			/**
 			 * 判断入口url是否符合规则
@@ -172,7 +168,7 @@
 		 * 如果是入口域名，则会停止程序运行
 		 */
 		private function enter_page() {
-			$content = @file_get_contents($this->url);
+			$content = $this->curl->get_contents($this->url);
 			if($content){
 
 				/**
@@ -221,7 +217,7 @@
 		 */
 		private function sorting_url($url_array) {
 
-			if($url_array && ($this->level < $this->max_level || $this->max_level == 0)){
+			if(!empty($url_array) && ($this->level < $this->max_level || $this->max_level == 0)){
 
 				/**
 				 * 更新url数组

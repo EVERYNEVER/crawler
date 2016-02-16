@@ -47,4 +47,5 @@
 	require_once CRAWLER_DATA.'Crawler.php';
 	
 	$CRAWLER = new Crawler();
+	$CRAWLER->run();
 ?>
