@@ -48,4 +48,3 @@
 	
 	$CRAWLER = new Crawler();
 	$CRAWLER->run();
-?>
