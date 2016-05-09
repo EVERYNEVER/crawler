@@ -1,50 +1,33 @@
 <?php
+/**
+ * 入口文件
+ * @author LL
+ */
 
-	/**
- 	* crawler入口文件
- 	*/
+	define("BASEDIR",__DIR__);
 
 	/**
 	 * 设置程序运行时间为永久
 	 */
 	set_time_limit(0);
 
-	header("Content-type: text/html; charset=utf-8");
+    /**
+     * 设置自动加载
+     */
+	include BASEDIR.'/Core/Loader.php';
+	spl_autoload_register("\\Core\\Loader::autoload");
 
-	/**
-	 * crawler路径
-	 */
-    define('CRAWLER',__DIR__.'/');
+    /**
+     * 引入注册组件文件
+     */
+	include BASEDIR."/component.php";
 
-	/**
-	 * crawler文件路径
-	 */
-	define('CRAWLER_DATA',CRAWLER.'data/');
+    /**
+     * 注册一个Config组件
+     */
+	Core\ClassFactory::bind("Config",$components["Config"]);
 
-	/**
-	 * 应用程序路径
-	 */
-	define('APP_PATH',CRAWLER.'app/');
-
-	/**
-	 * 应用扩展路径
-	 */
-	define('APP_EXTENDS_PATH',APP_PATH.'extends/');
-
-	/**
-	 * 引入公共类
-	 */
-	require_once CRAWLER_DATA.'Common.php';
-
-	/**
-	 * 引入应用类
-	 */
-	require_once CRAWLER_DATA.'Capp.php';
-
-	/**
-	 * 引入crawler文件
-	 */
-	require_once CRAWLER_DATA.'Crawler.php';
-	
-	$CRAWLER = new Crawler();
-	$CRAWLER->run();
+    /**
+     * 调用启动类，开始程序运行
+     */
+	new Core\Entrance(Core\ClassFactory::make("Config"), $components);
