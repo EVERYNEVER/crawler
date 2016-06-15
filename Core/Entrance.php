@@ -34,9 +34,7 @@ class Entrance
         $sleepTime = $this->config->get("sleepTime");
 
         //调用crawler组件
-        $Crawler = Component::Crawler($maxLevel,$presentUrl,$sleepTime);
-
-        //$this->begin($Crawler);
+        $this->begin(Component::Crawler($maxLevel,$presentUrl,$sleepTime));
     }
 
     /**
@@ -55,6 +53,10 @@ class Entrance
      */
     private function begin(Interfaces\CrawlerInterface $Crawler)
     {
-        $Crawler->run();
+        try {
+            $Crawler->run();
+        } catch(\Exception $e){
+            echo $e->getMessage();
+        }
     }
 }

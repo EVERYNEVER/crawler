@@ -6,24 +6,29 @@
 	/**
 	 * 应用文件名称
 	 */
-	$config['app_name'] = '';
+    $config['appName'] = 'App\Yachang';
 
 	/**
 	 * 钩子前缀
 	 */
-	$config['hook_prefix'] = 'hook_';
+	$config['hookPrefix'] = 'hook';
 
 	/**
 	 * 入口url
 	 * 如果为域名，需要在最后加上斜杠，如http://www.baidu.com/
 	 */
-	$config['presentUrl'] = 'http://www.jingbo.net/';
+	$config['presentUrl'] = 'http://yinxiaofeng.artron.net/about';
 	
 	/**
 	 * 目标网站的域名
-	 * 如http://www.baidu.com
+	 * 如baidu.com
 	 */
-	$config['domain_name'] = 'http://www.jingbo.net';
+	$config['domain'] = 'artron.net';
+
+    /**
+     * 是否只获取域名内的链接，true是，false获取域名外的内容
+     */
+	$config["isdomain"] = true;
 
 	/**
 	 * 最大层级
@@ -34,19 +39,14 @@
 	/**
 	 * 每次执行完的休眠时间
 	 */
-	$config['sleepTime'] = 0.5;
+	$config['sleepTime'] = 1;
 
-	/**
-	 * 是否开启模拟登录，TRUE开启，FALSE不开启
-	 */
-	$config['simulation'] = FALSE;
-
-	/**
-	 * 模拟登录的帐号
-	 */
-	$config['account'] = '';
-
-	/**
-	 * 模拟登录的密码
-	 */
-	$config['password'] = '';
+    /**
+     * 数据库配置
+     */
+	$config['db'] = [
+		"host" => "127.0.0.1",
+		"user" => "root",
+        "password" => "abc12345",
+        "dbname" => "testdb",
+	];

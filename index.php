@@ -30,4 +30,4 @@
     /**
      * 调用启动类，开始程序运行
      */
-	new Core\Entrance(Core\ClassFactory::make("Config"), $components);
+	new Core\Entrance(Core\Component::Config(), $components);

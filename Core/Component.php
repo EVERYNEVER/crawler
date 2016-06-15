@@ -56,7 +56,7 @@ class Component
             return self::$components[$name];
         }
     }
-    
+
     /**
      * 通过静态方法获取这个类
      */

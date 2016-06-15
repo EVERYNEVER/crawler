@@ -8,7 +8,15 @@ class UrlRubbish implements UrlRubbishInterface
 {
     private $list = array();
 
-    public function inRubbish($value)
+    public function __construct()
+    {
+        $list = @file_get_contents(BASEDIR."/log/urlrubbish.php");
+        if(unserialize($list)){
+            //$this->list = unserialize($list);
+        }
+    }
+
+    public function isInRubbish($value)
     {
         if(empty($this->list)){
             return false;
@@ -20,5 +28,11 @@ class UrlRubbish implements UrlRubbishInterface
     public function joinRubbish($value)
     {
         $this->list[] = $value;
+        $this->saveRubbish();
+    }
+
+    private function saveRubbish()
+    {
+        file_put_contents(BASEDIR."/log/urlrubbish.php",serialize($this->list));
     }
 }

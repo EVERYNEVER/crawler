@@ -29,4 +29,10 @@ interface QueueInterface
      * 获取队列长度
      */
     public function lengthQueue();
+
+    /**
+     * 判断这个值是否存在队列中
+     * @param $value
+     */
+    public function isInQueue($value);
 }

@@ -19,14 +19,21 @@ class GuideUrl implements UrlInterface
 
     public function setUrl($urlArray = array())
     {
-        //如果这个url已经存在于垃圾堆中，则不插入队列
-        array_walk($urlArray,function($value,$key){
-            if($this->UrlRubbish->inRubbish(md5($value))){
-                unset($value);
-            }
-        });
+        $newUrlArray = array();
 
-        $this->UrlQueue->inQueue($urlArray);
+        if($urlArray) {
+            //如果这个url已经存在于垃圾堆中或urlQueue中，则不插入队列
+            array_walk($urlArray, function ($value, $key) use (&$newUrlArray) {
+                //去除掉链接最后的/
+                $value = trim($value, "/ ");
+
+                if (!$this->UrlRubbish->isInRubbish(md5($value)) && !$this->UrlQueue->isInQueue($value) && !in_array($value, $newUrlArray)) {
+                    $newUrlArray[] = $value;
+                }
+            });
+        }
+
+        $this->UrlQueue->inQueue($newUrlArray);
     }
 
     public function getUrl()
