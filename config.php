@@ -6,7 +6,7 @@
 	/**
 	 * 应用文件名称
 	 */
-    $config['appName'] = 'App\Yachang';
+    $config['appName'] = 'App\Test';
 
 	/**
 	 * 钩子前缀
